@@ -1,0 +1,38 @@
+ShadowsocksNeo   
+
+Version: Gen4
+
+Implemented ipv6 address
+
+implemented chacha20-ietf-poly1305
+
+Change BouncyCastle to Java Cryptography Extenshion on aeadCipher class
+To fix bug: 
+ERROR [nioEventLoopGroup-3-14] s.c.ExceptionDuplexHandler [ExceptionDuplexHandler.java:34] unknown [342967a6] happen error, will be close : javax.crypto.AEADBadTagException: Tag mismatch
+io.netty.handler.codec.DecoderException: javax.crypto.AEADBadTagException: Tag mismatch
+
+When use with NeoClient this error not occurs
+
+Version: Gen4i 
+
+Added Shadowsocks 2022 spec support (Blake3-aes-gcm encryption)
+Now comes with Neo Client
+
+Issues:
+Blake3 encryption doesn't work when run trough:
+
+sudo nohup java -jar or trough systemd (sudo systemctl service)
+Works fine if starts manually trough java -jar command.
+
+ToDo List:
+
+Implement UDP Protocol
+
+Build Shadowsocks-Socks client / Server with udp support
+
+
+
+
+
+
+
