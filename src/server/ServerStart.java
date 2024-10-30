@@ -1,5 +1,7 @@
 package server;
 
+import com.google.common.net.HostAndPort;
+
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import server.menu.ServerHelper;
 import server.chananelHandler.ExceptionDuplexHandler;
@@ -75,32 +77,12 @@ public class ServerStart {
         channelFuture.channel().closeFuture().sync();
     }
 
-    //Fix1: Now support both ipv4 and ipv6
-    //todo: Apply to NeoClient, Maybe get rid of "IpAddress" library :P
+    //Custom parser replaced by "guava"
+
     private static InetSocketAddress getAddress(String address) {
-        String host;
-        int port;
-
-        if (address.startsWith("[")) {
-            // IPv6
-            int closingBracketIndex = address.indexOf(']');
-            if (closingBracketIndex == -1) {
-                throw new IllegalArgumentException("illegal address: " + address);
-            }
-            host = address.substring(1, closingBracketIndex);
-            port = Integer.parseInt(address.substring(closingBracketIndex + 2));
-        } else {
-            // IPv4
-            int colonIndex = address.lastIndexOf(':');
-            if (colonIndex == -1) {
-                throw new IllegalArgumentException("illegal address: " + address);
-            }
-            host = address.substring(0, colonIndex);
-            port = Integer.parseInt(address.substring(colonIndex + 1));
-        }
-
-        return new InetSocketAddress(host, port);
-    }
+    HostAndPort hostAndPort = HostAndPort.fromString(address);
+    return new InetSocketAddress(hostAndPort.getHost(), hostAndPort.getPort());
+}
 }
 
 // Legacy IPaddress loader
