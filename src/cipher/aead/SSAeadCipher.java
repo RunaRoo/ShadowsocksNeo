@@ -12,16 +12,13 @@ import javax.crypto.*;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-import javax.crypto.Cipher;
 import java.security.*;
-
 import util.ByteUtils;
 
 import java.security.SecureRandom;
 
-
 /**
- * aes 256 gcm
+ * aes 128/192/256 gcm
  * @author NanoBee
  * @since 2024/09/01
  */
@@ -160,14 +157,14 @@ public class SSAeadCipher implements SSCipher {
     }
 
     private byte[] hkdfExtract(byte[] salt, byte[] ikm) throws NoSuchAlgorithmException, InvalidKeyException {
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(new SecretKeySpec(salt, "HmacSHA256"));
+        Mac mac = Mac.getInstance("HmacSHA1");
+        mac.init(new SecretKeySpec(salt, "HmacSHA1"));
         return mac.doFinal(ikm);
     }
 
     private byte[] hkdfExpand(byte[] prk, byte[] info, int length) throws NoSuchAlgorithmException, InvalidKeyException {
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(new SecretKeySpec(prk, "HmacSHA256"));
+        Mac mac = Mac.getInstance("HmacSHA1");
+        mac.init(new SecretKeySpec(prk, "HmacSHA1"));
         byte[] result = new byte[length];
         byte[] t = new byte[0];
         int offset = 0;
@@ -252,3 +249,4 @@ public class SSAeadCipher implements SSCipher {
         return bytes;
     }
 }
+
