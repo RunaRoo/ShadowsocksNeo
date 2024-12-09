@@ -6,6 +6,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufUtil;
 import io.netty.buffer.Unpooled;
 
+import org.bouncycastle.crypto.digests.SHA1Digest;
 import org.bouncycastle.crypto.modes.ChaCha20Poly1305;
 import org.bouncycastle.crypto.params.AEADParameters;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -148,13 +149,13 @@ private final ChaCha20Poly1305 encodeChaCha20Poly1305Cipher = new ChaCha20Poly13
     }
 
     private static byte[] hkdfExtract(byte[] salt, byte[] key) throws NoSuchAlgorithmException, InvalidKeyException {
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(new SecretKeySpec(key, "HmacSHA256"));
+        Mac mac = Mac.getInstance("HmacSHA1");
+        mac.init(new SecretKeySpec(key, "HmacSHA1"));
         return mac.doFinal(salt);
     }
 
     private static byte[] hkdfExpand(byte[] prk, byte[] info, int length) {
-        HKDFBytesGenerator hkdf = new HKDFBytesGenerator(new SHA256Digest());
+        HKDFBytesGenerator hkdf = new HKDFBytesGenerator(new SHA1Digest());
         HKDFParameters params = new HKDFParameters(prk, null, info);
         hkdf.init(params);
         byte[] result = new byte[length];

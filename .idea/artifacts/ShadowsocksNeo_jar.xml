@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/ShadowsocksNeo_jar</output-path>
     <root id="archive" name="ShadowsocksNeo.jar">
       <element id="module-output" name="ShadowsocksNeo" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/libs/IPAddress (1).jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/slf4j-api-2.0.16.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/commons-cli-1.9.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/logback-core-1.5.7.jar" path-in-jar="/" />
@@ -45,6 +44,7 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/netty/netty-transport-native-kqueue-4.1.114.Final-osx-aarch_64.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/netty/netty-transport-native-epoll-4.1.114.Final-linux-aarch_64.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/netty/netty-resolver-dns-native-macos-4.1.114.Final-osx-aarch_64.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/guava-33.3.1-jre.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

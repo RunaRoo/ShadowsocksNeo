@@ -29,7 +29,7 @@ import java.security.SecureRandom;
  * @since 2024/09/21
  */
 
-//todo fore some reason this cipher works only with "Neo" client
+//todo fore some reason this cipher works only with "Neo" client  //FIXED on 0x29JX-KN44
 public class SSBlake3AEAD implements SSCipher {
 
     private String cipherMethod;
@@ -176,15 +176,15 @@ public class SSBlake3AEAD implements SSCipher {
     }
 
     private byte[] hkdfExtract(byte[] salt, byte[] ikm) throws NoSuchAlgorithmException, InvalidKeyException {
-        Mac mac = Mac.getInstance("HmacSHA256");
-        mac.init(new SecretKeySpec(salt, "HmacSHA256"));
+        Mac mac = Mac.getInstance("HmacSHA1");
+        mac.init(new SecretKeySpec(salt, "HmacSHA1"));
         return mac.doFinal(ikm);
     }
 
     private byte[] hkdfExpand(byte[] prk, byte[] info, int length) throws NoSuchAlgorithmException, InvalidKeyException, NoSuchAlgorithmException, InvalidKeyException {
-        Mac mac = Mac.getInstance("HmacSHA256");
+        Mac mac = Mac.getInstance("HmacSHA1");
 
-        mac.init(new SecretKeySpec(prk, "HmacSHA256"));
+        mac.init(new SecretKeySpec(prk, "HmacSHA1"));
         byte[] result = new byte[length];
         byte[] t = new byte[0];
         int offset = 0;
